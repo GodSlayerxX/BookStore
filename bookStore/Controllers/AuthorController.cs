@@ -5,37 +5,36 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace bookStore.Controllers
 {
-    [Route("api/[controller]")]
     [ApiController]
+    [Route("[controller]")]
     public class AuthorController : ControllerBase
     {
         private readonly IAuthorService _authorService;
-        public AuthorController()
+        public AuthorController(IAuthorService authorService)
         {
-            _authorService = _authorService;
+            _authorService = authorService;
         }
-        [HttpGet("GetBookById")]
-        public Author GetAuthorById(int id)
-        {
-            return _authorService.GetById(id);
-        }
-        [HttpGet("GetAllAuthors")]
-        public List<Author> GetAllAuthors()
+        [HttpGet("GetAll")]
+        public List<Author> GetAll()
         {
             return _authorService.GetAll();
         }
-
-        [HttpPost]
-        public void Add([FromBody] Author author)
+        [HttpGet("GetById")]
+        public IActionResult GetById(int id)
         {
-            _authorService.Add(author);
-        }
+            if (id <= 0)
+            {
+                return BadRequest("Id..");
+            }
 
-        [HttpDelete]
-        public void Delete([FromBody] Author author)
-        {
-            _authorService.Remove(id: author.Id);
-        }
+            var response = _authorService.GetById(id);
 
+            if (response == null)
+            {
+                return NotFound(id);
+            }
+
+            return Ok(_authorService.GetById(id));
+        }
     }
 }

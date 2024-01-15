@@ -16,6 +16,11 @@ namespace bookStore.Validations
                 .NotEmpty()
                 .MinimumLength(2)
                 .MaximumLength(50);
+
+            RuleFor(x => x.SomeDate)
+                .NotNull()
+                .NotEmpty()
+                .LessThan(new DateTime(2020, 02, 10));
         }
     }
 }

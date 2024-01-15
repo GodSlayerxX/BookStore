@@ -1,5 +1,4 @@
-﻿
-using BookStore.Models.Models.Users;
+﻿using BookStore.Models.Models.Users;
 
 namespace BookStore.BL.Interfaces
 {

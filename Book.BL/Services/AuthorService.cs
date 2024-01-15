@@ -10,24 +10,29 @@ namespace BookStore.BL.Services
 {
     public class AuthorService : IAuthorService
     {
-        public void Add(Author author)
+        private readonly IAuthorRepository _authorRepository;
+        public AuthorService(IAuthorRepository authorRepository)
         {
-            throw new NotImplementedException();
+            _authorRepository = authorRepository;
         }
-
         public List<Author> GetAll()
         {
-            throw new NotImplementedException();
+            return _authorRepository.GetAll();
         }
 
         public Author GetById(int id)
         {
-            throw new NotImplementedException();
-        }
+            if (id > 50000) return null;
 
+            return _authorRepository.GetById(id);
+        }
+        public void Add(Author author)
+        {
+            _authorRepository.Add(author);
+        }
         public void Remove(int id)
         {
-            throw new NotImplementedException();
+            _authorRepository.Remove(id);
         }
     }
 }

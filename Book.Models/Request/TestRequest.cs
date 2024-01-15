@@ -4,12 +4,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BookStore.Models.Models.Users
+namespace BookStore.Models.Request
 {
-    public class Library
+    public class TestRequest
     {
         public int Id { get; set; }
+
         public string Name { get; set; }
+
         public DateTime SomeDate { get; set; }
     }
 }

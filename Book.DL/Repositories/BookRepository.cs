@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using BookStore.Models.Models;
 
 namespace BookStore.DL.Repositories
 {
@@ -13,23 +14,27 @@ namespace BookStore.DL.Repositories
     {
         public void Add(Book book)
         {
-            OutMemoryDb.booksData.Add(book);
+            InMemoryDb.booksData.Add(book);
         }
 
         public List<Book> GetAll()
         {
-            return OutMemoryDb.booksData;
+            return InMemoryDb.booksData;
         }
 
         public Book GetById(int id)
         {
-            return OutMemoryDb.booksData.First(a => a.Id == id);
+            return InMemoryDb.booksData.First(a => a.Id == id);
         }
 
         public void Remove(int id)
         {
             var book = GetById(id);
-            OutMemoryDb.booksData.Remove(book);
+            InMemoryDb.booksData.Remove(book);
+        }
+        public List<Book> GetAllByAuthor(int authorId)
+        {
+            return InMemoryDb.BookData.Where(b => b.AuthorId == authorId).ToList();
         }
     }
 }

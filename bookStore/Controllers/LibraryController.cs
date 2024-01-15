@@ -7,8 +7,28 @@ namespace bookStore.Controllers
     [ApiController]
     public class LibraryController : ControllerBase
     {
-        public LibraryController() 
-        { 
+        private readonly ILibraryService _libraryService;
+
+        public LibraryController(ILibraryService libraryService)
+        {
+            _libraryService = libraryService;
         }
+
+        [HttpPost("GetBooksByAuthor")]
+        public GetBooksByAuthorResponse?
+            GetBooksByAuthor(GetBooksByAuthorRequest? request)
+        {
+            if (request == null) return null;
+
+            return _libraryService.GetBooksByAuthor(request);
+        }
+
+        [HttpPost("TestEndpoint")]
+        public string GetTestEndpoint(
+            [FromBody] TestRequest request)
+        {
+            return "Test OK";
+        }
+
     }
 }

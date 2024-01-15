@@ -9,30 +9,27 @@ namespace bookStore.Controllers
     [ApiController]
     public class BookController : ControllerBase
     {
-        private readonly IBookService _bookService;
-        public BookController()
+        private readonly IBookRepository _bookRepository;
+
+        public BookController(IBookRepository bookRepository)
         {
-            _bookService = _bookService;
+            _bookRepository = bookRepository;
         }
-        [HttpGet("GetBookById")]
-        public Book GetBookById(int id)
+
+        [HttpGet]
+        public Book? Get(int id)
         {
-            return _bookService.GetById(id);
+            if (id < 0) return null;
+
+            return _bookRepository.GetBook(id);
         }
-        [HttpGet("GetAllBooks")]
-        public List<Book> GetAllBooks()
+
+        [HttpPost("Add")]
+        public void Add([FromBody] Book book)
         {
-            return _bookService.GetAll();
-        }
-        [HttpPost]
-        public void Add([FromBody]Book book)
-        {
-            _bookService.Add(book);
-        }
-        [HttpDelete]
-        public void Delete([FromBody]Book book)
-        {
-            _bookService.Remove(id: book.Id);
+            if (book == null) return;
+
+            _bookRepository.AddBook(book);
         }
     }
 }

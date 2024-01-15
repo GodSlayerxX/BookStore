@@ -1,33 +1,48 @@
 ﻿using BookStore.BL.Interfaces;
+using BookStore.DL.Interfaces;
 using BookStore.Models.Models.Users;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BookStore.BL.Services
 {
     public class BookService : IBookService
     {
-        public void Add(Book book)
-        {
-            throw new NotImplementedException();
-        }
+        private readonly IBookRepository _bookRepository;
 
+        public BookService(IBookRepository bookRepository)
+        {
+            _bookRepository = bookRepository;
+        }
         public List<Book> GetAll()
         {
-            throw new NotImplementedException();
+            return _bookRepository.GetAll();
         }
 
         public Book GetById(int id)
         {
-            throw new NotImplementedException();
+            if (id <= 0) return new Book();
+
+            return _bookRepository.GetById(id);
+        }
+
+        public void Add(Book book)
+        {
+            _bookRepository.Add(book);
         }
 
         public void Remove(int id)
         {
-            throw new NotImplementedException();
+            _bookRepository.Remove(id);
+        }
+
+        public List<Book> GetAllByAuthorAfterReleaseDate
+            (int authorId, DateTime afterDate)
+        {
+            var result =
+                _bookRepository.GetAllByAuthor(authorId);
+
+            return result
+                .Where(b => b.ReleaseDate >= afterDate)
+                .ToList();
         }
     }
 }
