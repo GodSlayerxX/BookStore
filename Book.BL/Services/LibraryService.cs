@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using BookStore.BL.Interfaces;
+using BookStore.Models.Request;
+using BookStore.Models.Responses;
 
 namespace BookStore.BL.Services
 {
@@ -20,18 +22,18 @@ namespace BookStore.BL.Services
             _bookService = bookService;
         }
 
-        public GetAllBooksByAuthorResponse?
+        public GetBooksByAuthorResponse?
             GetAllBooksByAuthorAfterReleaseDate(
-                GetAllBooksByAuthorRequest request)
+                GetBooksByAuthorRequest request)
         {
-            var response = new GetAllBooksByAuthorResponse
+            var response = new GetBooksByAuthorResponse
             {
                 Author = _authorService
                     .GetById(request.AuthorId),
                 Books = _bookService
                     .GetAllByAuthorAfterReleaseDate(
                         request.AuthorId,
-                        request.DateAfter)
+                        request.AfterDate)
             };
 
             return response;

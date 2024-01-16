@@ -1,4 +1,7 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using BookStore.BL.Interfaces;
+using BookStore.Models.Request;
+using BookStore.Models.Responses;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace bookStore.Controllers
@@ -20,7 +23,7 @@ namespace bookStore.Controllers
         {
             if (request == null) return null;
 
-            return _libraryService.GetBooksByAuthor(request);
+            return _libraryService.GetAllBooksByAuthorAfterReleaseDate(request);
         }
 
         [HttpPost("TestEndpoint")]

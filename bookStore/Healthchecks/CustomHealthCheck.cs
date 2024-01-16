@@ -1,4 +1,6 @@
-﻿namespace bookStore.Healthchecks
+﻿using Microsoft.Extensions.Diagnostics.HealthChecks;
+
+namespace bookStore.Healthchecks
 {
     public class CustomHealthCheck : IHealthCheck
     {

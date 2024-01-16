@@ -1,4 +1,6 @@
-﻿using System;
+﻿using BookStore.Models.Request;
+using BookStore.Models.Responses;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,9 +8,9 @@ using System.Threading.Tasks;
 
 namespace BookStore.BL.Interfaces
 {
-    public class ILibraryService
+    public interface ILibraryService
     {
-        GetAllBooksByAuthorResponse?
-            GetAllBooksByAuthorAfterReleaseDate(GetAllBooksByAuthorRequest request);
+        GetBooksByAuthorResponse?
+            GetAllBooksByAuthorAfterReleaseDate(GetBooksByAuthorRequest request);
     }
 }

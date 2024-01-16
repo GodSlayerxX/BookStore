@@ -1,8 +1,8 @@
+using bookStore.Healthchecks;
 using BookStore.BL.Interfaces;
 using BookStore.BL.Services;
 using BookStore.DL.Interfaces;
 using BookStore.DL.Repositories;
-using BookStore.Healthchecks;
 using FluentValidation;
 using FluentValidation.AspNetCore;
 
@@ -20,7 +20,6 @@ namespace bookStore
             builder.Services.AddSingleton<IAuthorService, AuthorService>();
             builder.Services.AddSingleton<IBookRepository, BookRepository>();
             builder.Services.AddSingleton<IBookService, BookService>();
-            builder.Services.AddSingleton<ILibraryService, LibraryService>();
 
             builder.Services.AddControllers();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -32,9 +31,8 @@ namespace bookStore
 
             builder.Services.AddSingleton<IBookRepository, BookRepository>();
 
-            builder.Services.AddHealthChecks()
-               .AddCheck<CustomHealthCheck>(nameof(CustomHealthCheck))
-               .AddUrlGroup(new Uri("https://google.bg"), name: "My Service");
+            builder.Services.AddHealthChecks().AddCheck<CustomHealthCheck>(nameof(CustomHealthCheck));
+               // AddUrlGroup(new Uri("https://google.bg"), name: "My Service");
 
             var app = builder.Build();
 

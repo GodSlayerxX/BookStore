@@ -14,23 +14,23 @@ namespace BookStore.DL.Repositories
     {
         public void Add(Book book)
         {
-            InMemoryDb.booksData.Add(book);
+            InMemoryDb.BookData.Add(book);
         }
 
         public List<Book> GetAll()
         {
-            return InMemoryDb.booksData;
+            return InMemoryDb.BookData;
         }
 
         public Book GetById(int id)
         {
-            return InMemoryDb.booksData.First(a => a.Id == id);
+            return InMemoryDb.BookData.First(a => a.Id == id);
         }
 
         public void Remove(int id)
         {
             var book = GetById(id);
-            InMemoryDb.booksData.Remove(book);
+            InMemoryDb.BookData.Remove(book);
         }
         public List<Book> GetAllByAuthor(int authorId)
         {

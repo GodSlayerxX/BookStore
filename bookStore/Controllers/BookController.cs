@@ -1,4 +1,5 @@
 ﻿using BookStore.BL.Interfaces;
+using BookStore.DL.Interfaces;
 using BookStore.Models.Models.Users;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -21,7 +22,7 @@ namespace bookStore.Controllers
         {
             if (id < 0) return null;
 
-            return _bookRepository.GetBook(id);
+            return _bookRepository.GetById(id);
         }
 
         [HttpPost("Add")]
@@ -29,7 +30,7 @@ namespace bookStore.Controllers
         {
             if (book == null) return;
 
-            _bookRepository.AddBook(book);
+            _bookRepository.Add(book);
         }
     }
 }
